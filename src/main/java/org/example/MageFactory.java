@@ -34,7 +34,16 @@ public class MageFactory {
         Mage rhonin = new Mage("Rhonin", 7, 93.0, mode);
         mageSet.add(rhonin);
 
+
+        merlin.setApprentices(saruman);
         merlin.setApprentices(gandalf);
+        merlin.setApprentices(rhonin);
+        gandalf.setApprentices(dumbledore);
+        dumbledore.setApprentices(morgana);
+        gandalf.setApprentices(medivh);
+        albus.setApprentices(merlin);
+        albus.setApprentices(sylvanus);
+
 
 
         return mageSet;

@@ -1,8 +1,7 @@
 package org.example;
-
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
+
 
 public class Main {
 
@@ -11,16 +10,24 @@ public class Main {
     public static void main(String[] args)
     {
         Set<Mage> mageSet = null;
+        Map<Mage, Integer> descendantStatistics = null;
 
         switch (args[0]) {
             case Const.ALT -> mageSet = MageFactory.StartFactory(Const.ALT, mageSet);
             case Const.NATURAL -> mageSet =  MageFactory.StartFactory(Const.NATURAL, mageSet);
             case Const.NONE -> mageSet =  MageFactory.StartFactory(Const.NONE, mageSet);
         }
-        System.out.println(mageSet);
+
+        descendantStatistics = Mage.create_statistic_map(mageSet, args[0]);
         for (Mage mage : mageSet)
         {
             mage.print();
+
+        }
+        System.out.println("Descendant Statistics:");
+        for (Mage mage : descendantStatistics.keySet())
+        {
+            System.out.println(mage + " has " + descendantStatistics.get(mage) + " descendants");
 
         }
 

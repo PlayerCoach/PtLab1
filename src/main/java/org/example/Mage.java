@@ -10,6 +10,7 @@ public class Mage  implements Comparable<Mage>
     private final String  name;
     private final  int  level;
     private final double power;
+    private final String mode;
     private Set<Mage> apprentices = null ;
 
     public Mage(String name, int level, double power, String mode)
@@ -17,6 +18,7 @@ public class Mage  implements Comparable<Mage>
         this.name = name;
         this.level = level;
         this.power = power;
+        this.mode = mode;
         switch (mode) {
             case Const.NATURAL -> apprentices = new TreeSet<>();
             case Const.ALT -> apprentices = new TreeSet<>(new AltMageComparator());
@@ -84,6 +86,31 @@ public class Mage  implements Comparable<Mage>
             }
         }
     }
+    public static Map<Mage, Integer> create_statistic_map(Set<Mage> mageSet, String mode) {
+        Map<Mage, Integer> descendantStatistics = switch (mode) {
+            case Const.NONE -> new HashMap<>();
+            case Const.NATURAL -> new TreeMap<>();
+            case Const.ALT -> new TreeMap<>(new AltMageComparator());
+            default -> throw new IllegalArgumentException("Invalid mode: " + mode);
+        };
+        for (Mage mage : mageSet)
+        {
+            descendantStatistics.put(mage, mage.countDescendants());
+        }
+
+        return descendantStatistics;
+    }
+    public int countDescendants() {
+        int count = 0;
+        if (apprentices != null) {
+            for (Mage apprentice : apprentices) {
+                count += apprentice.countDescendants() + 1;
+            }
+        }
+        return count;
+    }
+
+
 
 
     public static class AltMageComparator implements Comparator<Mage>
