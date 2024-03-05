@@ -10,7 +10,6 @@ public class Mage  implements Comparable<Mage>
     private final String  name;
     private final  int  level;
     private final double power;
-    private final String mode;
     private Set<Mage> apprentices = null ;
 
     public Mage(String name, int level, double power, String mode)
@@ -18,7 +17,6 @@ public class Mage  implements Comparable<Mage>
         this.name = name;
         this.level = level;
         this.power = power;
-        this.mode = mode;
         switch (mode) {
             case Const.NATURAL -> apprentices = new TreeSet<>();
             case Const.ALT -> apprentices = new TreeSet<>(new AltMageComparator());

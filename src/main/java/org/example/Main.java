@@ -5,12 +5,10 @@ import java.util.Set;
 
 public class Main {
 
-
-
     public static void main(String[] args)
     {
         Set<Mage> mageSet = null;
-        Map<Mage, Integer> descendantStatistics = null;
+        Map<Mage, Integer> descendantStatistics;
 
         switch (args[0]) {
             case Const.ALT -> mageSet = MageFactory.StartFactory(Const.ALT, mageSet);
@@ -19,6 +17,7 @@ public class Main {
         }
 
         descendantStatistics = Mage.create_statistic_map(mageSet, args[0]);
+        assert mageSet != null;
         for (Mage mage : mageSet)
         {
             mage.print();
