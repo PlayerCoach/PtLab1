@@ -35,14 +35,7 @@ public class MageFactory {
         mageSet.add(rhonin);
 
         merlin.setApprentices(gandalf);
-        gandalf.setApprentices(dumbledore);
-        dumbledore.setApprentices(saruman);
-        saruman.setApprentices(radagast);
-        radagast.setApprentices(morgana);
-        morgana.setApprentices(albus);
-        albus.setApprentices(medivh);
-        medivh.setApprentices(sylvanus);
-        sylvanus.setApprentices(rhonin);
+
 
         return mageSet;
     }

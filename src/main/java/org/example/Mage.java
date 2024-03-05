@@ -26,8 +26,12 @@ public class Mage  implements Comparable<Mage>
     }
     void setApprentices(Mage apprentices)
     {
-        this.apprentices.add(apprentices);
+        if (!this.equals(apprentices))
+        {
+            this.apprentices.add(apprentices);
+        }
     }
+
 
     @Override
     public boolean equals(Object object)
@@ -68,20 +72,19 @@ public class Mage  implements Comparable<Mage>
     }
 
     private void printRecursive(Mage mage, int indentLevel) {
-        if (mage.apprentices == null) {
-            return;
+        StringBuilder indent = new StringBuilder();
+        for (int i = 0; i < indentLevel; i++) {
+            indent.append("-");
         }
+        System.out.println(indent + " " + mage);
 
-        for (Mage apprentice : mage.apprentices) {
-            StringBuilder indent = new StringBuilder();
-            for (int i = 0; i < indentLevel; i++) {
-                indent.append("-");
+        if (mage.apprentices != null) {
+            for (Mage apprentice : mage.apprentices) {
+                printRecursive(apprentice, indentLevel + 1);
             }
-            System.out.println(indent +" "+ apprentice);
-
-            printRecursive(apprentice, indentLevel + 1);
         }
     }
+
 
     public static class AltMageComparator implements Comparator<Mage>
     {
